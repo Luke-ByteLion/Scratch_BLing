@@ -52,13 +52,6 @@ public class ScratcherModel {
         this.price = price;
     }
 
-   /* public ScratcherModel(String name, String description, String[] sizes, double price) {
-        this.name = name;
-        this.description = description;
-        this.sizes = sizes;
-        this.price = price;
-    }*/
-
     public long getId() {
         return id;
     }
