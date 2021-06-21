@@ -16,7 +16,7 @@ A Simple API to provide access to the Bling Scratcher inventory.
         -e.x localhost:8080/api/scratch2
 2. POST
     * (adds a new scratcher) localhost:8080/api/scratcher
-        '''json 
+        '''javascript 
             { 
                 "name": "Test add new scratcher",
                 "description": "Gold handle and fancy emeralds",
