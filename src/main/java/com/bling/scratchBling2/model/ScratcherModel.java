@@ -8,13 +8,9 @@ import javax.persistence.*;
 @Table(name = "ScratcherModel")
 public class ScratcherModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private @Id @GeneratedValue Long id;
 
-    public ScratcherModel() {
-
-    }
+    public ScratcherModel() { }
 
     @Column(name = "name")
     private String name;
@@ -52,11 +48,19 @@ public class ScratcherModel {
         this.price = price;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public ScratcherModel(Long id, String name, String description, String[] sizes, double price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.sizes = sizes;
+        this.price = price;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 

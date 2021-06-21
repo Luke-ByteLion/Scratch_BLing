@@ -5,8 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface scratcherRepo extends JpaRepository<ScratcherModel, String> {
-    ScratcherModel findByName(String scratcherName);
+public interface scratcherRepo extends JpaRepository<ScratcherModel, Long> {
 
-    //ScratcherModel findBy(String name);
 }

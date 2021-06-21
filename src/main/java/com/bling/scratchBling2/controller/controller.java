@@ -1,5 +1,6 @@
 package com.bling.scratchBling2.controller;
 
+import com.bling.scratchBling2.Exception.ScratcherNotFoundException;
 import com.bling.scratchBling2.model.ScratcherModel;
 import com.bling.scratchBling2.repo.scratcherRepo;
 import org.slf4j.Logger;
@@ -19,11 +20,19 @@ public class controller {
     @Autowired
     private scratcherRepo repo;
 
+    controller(scratcherRepo repo) {
+        this.repo = repo;
+    }
+
     @GetMapping("/hello")
     public String hello() {
         return "hello";
     }
 
+    /**
+     * gets all the available scratchers in the database
+     * @return
+     */
     @GetMapping("/scratchers")
     public List<ScratcherModel> getScratchers() {
         logger.info("Getting all scratchers");
@@ -31,15 +40,17 @@ public class controller {
     }
 
     /**
-     * gets scratchers with mathing name parameter
-     * @param name name of scratcher to be found
-     * @return the scratcher mathcing the name parameter
+     * gets scratchers with matching name parameter
+     * @param id id of scratcher to be found
+     * @return the scratcher matching the name parameter
      */
-   @GetMapping("/scratchers/{name}")
-    public ResponseEntity<ScratcherModel> getScratcherByName(@PathVariable(value = "name") String name) {
-        logger.info("Getting sratcher by name...");
-        ScratcherModel scratcher = repo.findByName(name);
-        return ResponseEntity.ok().body(scratcher);
+   @GetMapping("/scratch{id}")
+    public ScratcherModel oneScratch(@PathVariable("id") Long id) {
+        logger.info("Getting scratcher by name...");
+       /* ScratcherModel scratcher = repo.findById(id);
+        return ResponseEntity.ok().body(scratcher);*/
+       return repo.findById(id)
+               .orElseThrow(() -> new ScratcherNotFoundException(id));
     }
 
     /**
@@ -53,20 +64,20 @@ public class controller {
          return repo.save(scratcher);
     }
 
-    @PutMapping("/scratcher/{name}")
-    public ResponseEntity<ScratcherModel> scratcherByName(@PathVariable(value = "name") String scratcherName,
+   /* @PutMapping("/scratcher{id}")
+    public ResponseEntity<ScratcherModel> scratcherByName(@PathVariable(value = "id") long id,
                                                           @RequestParam(required = false) ScratcherModel updateScratcher) {
         logger.info("attempting to update scratcher...");
-        ScratcherModel scratcher = repo.findByName(scratcherName);
+        ScratcherModel scratcher = repo.findById(id);
         scratcher.setPrice(updateScratcher.getPrice());
         repo.save(scratcher);
         return ResponseEntity.ok().body(updateScratcher);
-    }
+    }*/
 
-    @DeleteMapping("/scratcher/{name}")
-    public void deleteScratcher(@PathVariable(value="name") String name) {
+   /* @DeleteMapping("/scratcher{id}")
+    public void deleteScratcher(@PathVariable(value="id") long id) {
         logger.info("delete scratcher...");
-        ScratcherModel scratcher = repo.findByName(name);
+        ScratcherModel scratcher = repo.findById(id);
         repo.delete(scratcher);
-    }
+    }*/
 }
