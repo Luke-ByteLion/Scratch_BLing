@@ -8,6 +8,10 @@ A Simple API to provide access to the Bling Scratcher inventory.
 3. type "maven spring-boot:run" (MacOS)
 4. open Postman to make API calls on "http://localhost:8080"
 
+# Connect to EC2 Instance
+1. http://ec2-18-117-243-129.us-east-2.compute.amazonaws.com:8080/api/scratchers 
+    - Use this link, changing the endpoint using the same conventions listed below. 
+
 ## Usage
 1. GET 
     * (all available scratchers) localhost:8080/api/scratchers
